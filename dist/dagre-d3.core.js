@@ -167,6 +167,12 @@ function createEdgeLabels(selection, g) {
   svgEdgeLabels.enter()
     .append("g")
       .classed("edgeLabel", true)
+      .attr("data-from", function (d) {
+        return d.v;
+      })
+      .attr("data-to", function (d) {
+        return d.w;
+      })
       .style("opacity", 0);
   svgEdgeLabels.each(function(e) {
     var edge = g.edge(e),
@@ -292,6 +298,12 @@ function enter(svgPaths, g) {
   var svgPathsEnter = svgPaths.enter()
     .append("g")
       .attr("class", "edgePath")
+      .attr("data-from", function (d) {
+        return d.v;
+      })
+      .attr('data-to', function (d) {
+        return d.w;
+      })
       .style("opacity", 0);
   svgPathsEnter.append("path")
     .attr("class", "path")
@@ -343,6 +355,9 @@ function createNodes(selection, g, shapes) {
   svgNodes.enter()
     .append("g")
       .attr("class", "node")
+      .attr("id", function (d) {
+        return "node-" + d;
+      })
       .style("opacity", 0);
   svgNodes.each(function(v) {
     var node = g.node(v),
